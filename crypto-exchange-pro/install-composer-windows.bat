@@ -27,6 +27,23 @@ if %errorlevel% equ 0 (
     goto :success
 )
 
+REM Method 1.5: Try with PHP 8.2 compatibility
+echo Method 1.5: Trying with PHP 8.2 compatibility fixes
+if exist composer-php82.json (
+    copy composer.json composer-backup.json
+    copy composer-php82.json composer.json
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+    if %errorlevel% equ 0 (
+        echo.
+        echo SUCCESS: Dependencies installed with PHP 8.2 compatibility!
+        echo.
+        goto :success
+    ) else (
+        copy composer-backup.json composer.json
+        del composer-backup.json
+    )
+)
+
 echo.
 echo Method 1 failed, trying Method 2...
 echo.

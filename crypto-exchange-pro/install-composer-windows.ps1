@@ -32,6 +32,23 @@ if ($LASTEXITCODE -eq 0) {
     goto success
 }
 
+# Method 1.5: Try with PHP 8.2 compatibility
+Write-Host "Method 1.5: Trying with PHP 8.2 compatibility fixes" -ForegroundColor Cyan
+if (Test-Path "composer-php82.json") {
+    Copy-Item "composer.json" "composer-backup.json"
+    Copy-Item "composer-php82.json" "composer.json"
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host ""
+        Write-Host "SUCCESS: Dependencies installed with PHP 8.2 compatibility!" -ForegroundColor Green
+        Write-Host ""
+        goto success
+    } else {
+        Copy-Item "composer-backup.json" "composer.json"
+        Remove-Item "composer-backup.json"
+    }
+}
+
 Write-Host ""
 Write-Host "Method 1 failed, trying Method 2..." -ForegroundColor Yellow
 Write-Host ""

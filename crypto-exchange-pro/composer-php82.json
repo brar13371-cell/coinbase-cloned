@@ -1,7 +1,7 @@
 {
     "name": "crypto-exchange/pro",
     "type": "project",
-    "description": "Production-grade cryptocurrency exchange platform",
+    "description": "Production-grade cryptocurrency exchange platform - PHP 8.2 Compatible",
     "keywords": ["laravel", "crypto", "exchange", "trading"],
     "license": "MIT",
     "require": {
