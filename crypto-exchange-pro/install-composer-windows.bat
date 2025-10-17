@@ -14,6 +14,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Installing PHP dependencies with Windows compatibility fixes...
+echo This will generate composer.lock file for consistent dependencies...
 echo.
 
 REM Method 1: Ignore platform requirements
@@ -78,10 +79,22 @@ echo ========================================
 echo Installation completed successfully!
 echo ========================================
 echo.
+
+REM Check if composer.lock was created
+if exist composer.lock (
+    echo ✓ composer.lock file created successfully
+    echo ✓ Dependencies are now locked to specific versions
+) else (
+    echo ⚠ WARNING: composer.lock file not found
+    echo This may cause version inconsistencies
+)
+
+echo.
 echo Next steps:
 echo 1. Run: php artisan key:generate
 echo 2. Configure your .env file
 echo 3. Import database schema
-echo 4. Run: php artisan serve
+echo 4. Commit composer.lock to version control
+echo 5. Run: php artisan serve
 echo.
 pause

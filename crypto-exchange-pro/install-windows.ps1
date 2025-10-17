@@ -132,9 +132,10 @@ Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "1. Configure your .env file with database credentials" -ForegroundColor White
 Write-Host "2. Import the database schema: database\enhanced_schema.sql" -ForegroundColor White
-Write-Host "3. Start XAMPP (Apache and MySQL)" -ForegroundColor White
-Write-Host "4. Run: php artisan serve" -ForegroundColor White
-Write-Host "5. Visit: http://localhost:8000" -ForegroundColor White
+Write-Host "3. Commit composer.lock file to version control" -ForegroundColor White
+Write-Host "4. Start XAMPP (Apache and MySQL)" -ForegroundColor White
+Write-Host "5. Run: php artisan serve" -ForegroundColor White
+Write-Host "6. Visit: http://localhost:8000" -ForegroundColor White
 Write-Host ""
 Write-Host "For production deployment:" -ForegroundColor Yellow
 Write-Host "1. Set up a web server (Apache/Nginx)" -ForegroundColor White

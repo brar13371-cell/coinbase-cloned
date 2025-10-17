@@ -102,9 +102,10 @@ echo.
 echo Next steps:
 echo 1. Configure your .env file with database credentials
 echo 2. Import the database schema: database\enhanced_schema.sql
-echo 3. Start XAMPP (Apache and MySQL)
-echo 4. Run: php artisan serve
-echo 5. Visit: http://localhost:8000
+echo 3. Commit composer.lock file to version control
+echo 4. Start XAMPP (Apache and MySQL)
+echo 5. Run: php artisan serve
+echo 6. Visit: http://localhost:8000
 echo.
 echo For production deployment:
 echo 1. Set up a web server (Apache/Nginx)

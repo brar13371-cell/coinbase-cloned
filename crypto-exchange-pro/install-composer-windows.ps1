@@ -19,6 +19,7 @@ try {
 }
 
 Write-Host "Installing PHP dependencies with Windows compatibility fixes..." -ForegroundColor Yellow
+Write-Host "This will generate composer.lock file for consistent dependencies..." -ForegroundColor Cyan
 Write-Host ""
 
 # Method 1: Ignore platform requirements
@@ -83,10 +84,22 @@ Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "Installation completed successfully!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
+
+# Check if composer.lock was created
+if (Test-Path "composer.lock") {
+    Write-Host "✓ composer.lock file created successfully" -ForegroundColor Green
+    Write-Host "✓ Dependencies are now locked to specific versions" -ForegroundColor Green
+} else {
+    Write-Host "⚠ WARNING: composer.lock file not found" -ForegroundColor Yellow
+    Write-Host "This may cause version inconsistencies" -ForegroundColor Yellow
+}
+
+Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "1. Run: php artisan key:generate" -ForegroundColor White
 Write-Host "2. Configure your .env file" -ForegroundColor White
 Write-Host "3. Import database schema" -ForegroundColor White
-Write-Host "4. Run: php artisan serve" -ForegroundColor White
+Write-Host "4. Commit composer.lock to version control" -ForegroundColor White
+Write-Host "5. Run: php artisan serve" -ForegroundColor White
 Write-Host ""
 Read-Host "Press Enter to exit"
