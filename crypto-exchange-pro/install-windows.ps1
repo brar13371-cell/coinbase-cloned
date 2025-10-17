@@ -56,11 +56,17 @@ Write-Host ""
 
 # Install PHP dependencies
 Write-Host "Installing PHP dependencies..." -ForegroundColor Yellow
-composer install --no-dev --optimize-autoloader
+Write-Host "Using Windows-compatible composer configuration..." -ForegroundColor Cyan
+composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-pcntl
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "✗ ERROR: Failed to install PHP dependencies" -ForegroundColor Red
-    Read-Host "Press Enter to exit"
-    exit 1
+    Write-Host "Trying alternative installation method..." -ForegroundColor Yellow
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "✗ ERROR: Failed to install PHP dependencies" -ForegroundColor Red
+        Write-Host "Please check your PHP installation and try again" -ForegroundColor Yellow
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
 }
 Write-Host "✓ PHP dependencies installed" -ForegroundColor Green
 

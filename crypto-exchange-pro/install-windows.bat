@@ -39,11 +39,17 @@ echo.
 
 REM Install PHP dependencies
 echo Installing PHP dependencies...
-composer install --no-dev --optimize-autoloader
+echo Using Windows-compatible composer configuration...
+composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-pcntl
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to install PHP dependencies
-    pause
-    exit /b 1
+    echo Trying alternative installation method...
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+    if %errorlevel% neq 0 (
+        echo ERROR: Failed to install PHP dependencies
+        echo Please check your PHP installation and try again
+        pause
+        exit /b 1
+    )
 )
 
 REM Install Node.js dependencies
