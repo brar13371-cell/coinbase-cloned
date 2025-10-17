@@ -70,6 +70,45 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "✓ PHP dependencies installed" -ForegroundColor Green
 
+# Create Laravel directories
+Write-Host "Creating Laravel directory structure..." -ForegroundColor Yellow
+$directories = @(
+    "bootstrap\cache",
+    "storage\app",
+    "storage\app\public",
+    "storage\framework",
+    "storage\framework\cache",
+    "storage\framework\cache\data",
+    "storage\framework\sessions",
+    "storage\framework\views",
+    "storage\logs"
+)
+
+foreach ($dir in $directories) {
+    if (-not (Test-Path $dir)) {
+        New-Item -ItemType Directory -Path $dir -Force | Out-Null
+    }
+}
+
+# Create .gitkeep files
+$gitkeepFiles = @(
+    "bootstrap\cache\.gitkeep",
+    "storage\app\.gitkeep",
+    "storage\app\public\.gitkeep",
+    "storage\framework\cache\.gitkeep",
+    "storage\framework\cache\data\.gitkeep",
+    "storage\framework\sessions\.gitkeep",
+    "storage\framework\views\.gitkeep",
+    "storage\logs\.gitkeep"
+)
+
+foreach ($file in $gitkeepFiles) {
+    if (-not (Test-Path $file)) {
+        New-Item -ItemType File -Path $file -Force | Out-Null
+    }
+}
+Write-Host "✓ Laravel directories created" -ForegroundColor Green
+
 # Install Node.js dependencies
 Write-Host "Installing Node.js dependencies..." -ForegroundColor Yellow
 npm install
